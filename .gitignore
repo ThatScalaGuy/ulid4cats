@@ -2,6 +2,9 @@ target/
 # Created by https://www.toptal.com/developers/gitignore/api/scala,vscode,osx,metals
 # Edit at https://www.toptal.com/developers/gitignore?templates=scala,vscode,osx,metals
 
+.idea/
+.vscode/
+
 ### Metals ###
 .metals/
 .bloop/
