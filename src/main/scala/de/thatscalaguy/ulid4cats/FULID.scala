@@ -2,9 +2,6 @@ package de.thatscalaguy.ulid4cats
 
 import net.petitviolet.ulid4s.ULID
 import cats.effect.kernel.Sync
-import cats._
-import cats.data._
-import cats.implicits._
 
 trait FULID[F[_]] {
   def generate: F[String]
