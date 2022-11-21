@@ -7,7 +7,7 @@ val Scala3 = "3.2.1"
 ThisBuild / tlBaseVersion := "1.1"
 
 ThisBuild / scalaVersion := Scala213
-ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala213)
+ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
 
 ThisBuild / organization := "de.thatscalaguy"
 ThisBuild / organizationName := "ThatScalaGuy"
