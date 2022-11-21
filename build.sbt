@@ -2,11 +2,12 @@ import Dependencies._
 
 val Scala212 = "2.12.17"
 val Scala213 = "2.13.10"
+val Scala3 = "3.2.1"
 
 ThisBuild / tlBaseVersion := "1.1"
 
 ThisBuild / scalaVersion := Scala213
-ThisBuild / crossScalaVersions := Seq(Scala212, Scala213)
+ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala213)
 
 ThisBuild / organization := "de.thatscalaguy"
 ThisBuild / organizationName := "ThatScalaGuy"
