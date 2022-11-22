@@ -33,9 +33,9 @@ trait FULID[F[_]] {
 }
 
 object FULID {
-  def apply[F[_]](implicit ev: FULID[F]): FULID[F] = ev
+  def apply[F[_]](implicit ev: FULID[F]): ev.type = ev
 
-  implicit def instance[F[_]: Sync] = new FULID[F] {
+  implicit def instance[F[_]: Sync]: FULID[F] = new FULID[F] {
     override def generate: F[String] = Sync[F].delay(ULID.generate)
 
     override def timeStamp(ulid: String): F[Option[Long]] =
