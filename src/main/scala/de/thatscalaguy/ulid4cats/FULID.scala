@@ -21,7 +21,8 @@
 
 package de.thatscalaguy.ulid4cats
 
-import net.petitviolet.ulid4s.ULID
+import cats.implicits._
+import wvlet.airframe.ulid.ULID
 import cats.effect.kernel.Sync
 
 trait FULID[F[_]] {
@@ -36,10 +37,14 @@ object FULID {
   def apply[F[_]](implicit ev: FULID[F]): ev.type = ev
 
   implicit def instance[F[_]: Sync]: FULID[F] = new FULID[F] {
-    override def generate: F[String] = Sync[F].delay(ULID.generate)
+    override def generate: F[String] = Sync[F].delay(ULID.newULIDString)
 
     override def timeStamp(ulid: String): F[Option[Long]] =
-      Sync[F].delay(ULID.timestamp(ulid))
+      Sync[F]
+        .delay(ULID.fromString(ulid).epochMillis.some)
+        .recover { case _ =>
+          none[Long]
+        }
 
     override def isValid(ulid: String): F[Boolean] =
       Sync[F].delay(ULID.isValid(ulid))
