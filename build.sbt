@@ -33,7 +33,7 @@ lazy val root = (project in file("."))
     name := "ulid4cats",
     libraryDependencies ++= Seq(
       catsEffect,
-      ulid4s cross CrossVersion.for3Use2_13
+      airframeUlid
     ),
     libraryDependencies += scalaTest % Test
   )
