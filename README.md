@@ -20,7 +20,7 @@ import cats.effect.{IO, IOApp, ExitCode}
 import de.thatscalaguy.ulid4cats.FULID
 
 object Main extends IOApp:
-	def run(args: List[String]): IO[ExitCode] = for {
+  def run(args: List[String]): IO[ExitCode] = for {
     id <- FULID[IO].generate
     _  <- IO.println(id)
   } yield ExitCode.Success
