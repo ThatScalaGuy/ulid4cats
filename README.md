@@ -10,7 +10,7 @@ Small cats-effect wrapper around the [airframe-ulid](https://github.com/wvlet/ai
 Add dependency to yor sbt file
 ```scala
 libraryDependencies ++= Seq(
-  "org.typelevel"   %% "cats-effect" % "3.4.8", // must be provided
+  "org.typelevel"   %% "cats-effect" % "3.5.0", // must be provided
   "de.thatscalaguy" %% "ulid4cats"   % "1.2.1",
 )
 ```
