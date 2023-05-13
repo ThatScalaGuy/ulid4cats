@@ -32,7 +32,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "ulid4cats",
     libraryDependencies ++= Seq(
-      catsEffect,
+      catsEffect % "provided",
       airframeUlid
     ),
     libraryDependencies += scalaTest % Test
