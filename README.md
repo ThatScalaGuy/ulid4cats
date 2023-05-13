@@ -11,7 +11,7 @@ Add dependency to yor sbt file
 ```scala
 libraryDependencies ++= Seq(
   "org.typelevel"   %% "cats-effect" % "3.5.0", // must be provided
-  "de.thatscalaguy" %% "ulid4cats"   % "1.2.1",
+  "de.thatscalaguy" %% "ulid4cats"   % "1.3.0",
 )
 ```
 Application print a new ulid to the console.
