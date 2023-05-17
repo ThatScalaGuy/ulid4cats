@@ -37,7 +37,7 @@ object FULID {
   def apply[F[_]](implicit ev: FULID[F]): ev.type = ev
 
   implicit def instance[F[_]: Sync]: FULID[F] = new FULID[F] {
-    override def generate: F[String] = Sync[F].delay(ULID.newULIDString)
+    override def generate: F[String] = Sync[F].blocking(ULID.newULIDString)
 
     override def timeStamp(ulid: String): F[Option[Long]] =
       Sync[F]
