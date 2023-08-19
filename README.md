@@ -1,5 +1,6 @@
 # ulid4cats
 
+![Cats Friendly Badge](https://typelevel.org/cats/img/cats-badge-tiny.png)
 [![ulid4cats Scala version support](https://index.scala-lang.org/thatscalaguy/ulid4cats/ulid4cats/latest-by-scala-version.svg?platform=jvm)](https://index.scala-lang.org/thatscalaguy/ulid4cats/ulid4cats)
 [![Maven Central](https://img.shields.io/maven-central/v/de.thatscalaguy/ulid4cats_2.13.svg)](https://maven-badges.herokuapp.com/maven-central/de.thatscalaguy/ulid4cats_2.13)
 
