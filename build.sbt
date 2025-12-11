@@ -1,39 +1,49 @@
 import Dependencies._
+import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
-val Scala212 = "2.12.20"
-val Scala213 = "2.13.17"
-val Scala3 = "3.3.6"
+val Scala213 = "2.13.16"
+val Scala3 = "3.3.4"
 
-ThisBuild / tlBaseVersion := "1.3"
+ThisBuild / tlBaseVersion := "2.0"
 
-ThisBuild / scalaVersion := Scala213
-ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
+ThisBuild / scalaVersion := Scala3
+ThisBuild / crossScalaVersions := Seq(Scala213, Scala3)
 
 ThisBuild / organization := "de.thatscalaguy"
 ThisBuild / organizationName := "ThatScalaGuy"
 
-ThisBuild / startYear := Some(2021)
+ThisBuild / startYear := Some(2025)
 ThisBuild / licenses := Seq(License.MIT)
 ThisBuild / developers := List(
   tlGitHubDev("ThatScalaGuy", "Sven Herrmann")
 )
 
 ThisBuild / githubWorkflowJavaVersions := Seq(
-  JavaSpec.temurin("8"),
   JavaSpec.temurin("11"),
-  JavaSpec.temurin("17")
+  JavaSpec.temurin("17"),
+  JavaSpec.temurin("21")
 )
 
 ThisBuild / tlVersionIntroduced := Map("3" -> "1.2.0")
 
-ThisBuild / tlSonatypeUseLegacyHost := false // deploy to s01.oss.sonatype.org
+lazy val root = tlCrossRootProject.aggregate(core)
 
-lazy val root = (project in file("."))
+lazy val core = crossProject(JVMPlatform, JSPlatform)
+  .crossType(CrossType.Full)
+  .in(file("core"))
   .settings(
     name := "ulid4cats",
     libraryDependencies ++= Seq(
-      catsEffect % "provided",
-      airframeUlid
-    ),
-    libraryDependencies += scalaTest % Test
+      catsCore.value,
+      catsEffect.value,
+      munit.value % Test,
+      munitCatsEffect.value % Test
+    )
+  )
+  .jvmSettings(
+    // JVM-specific settings
+  )
+  .jsSettings(
+    // Scala.js specific settings
+    scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.CommonJSModule) }
   )
