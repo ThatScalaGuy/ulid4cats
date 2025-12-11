@@ -85,7 +85,7 @@ object Ulid {
     *   the string to parse
     * @return
     *   a valid Ulid
-    * @throws IllegalArgumentException
+    * @throws java.lang.IllegalArgumentException
     *   if the string is not a valid ULID
     */
   def unsafeFromString(s: String): Ulid =
@@ -110,7 +110,7 @@ object Ulid {
     *   a 16-byte array
     * @return
     *   a valid Ulid
-    * @throws IllegalArgumentException
+    * @throws java.lang.IllegalArgumentException
     *   if the byte array is invalid
     */
   def unsafeFromBytes(bytes: Array[Byte]): Ulid =
