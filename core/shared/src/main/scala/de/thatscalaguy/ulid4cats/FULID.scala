@@ -100,8 +100,13 @@ object FULID {
     * @return
     *   a FULID instance
     */
-  implicit def instance[F[_]: Sync: Clock]: FULID[F] = {
-    val gen = UlidGen.randomDefault[F]
+  implicit def instance[F[_]: Sync](implicit clock: Clock[F]): FULID[F] = {
+    implicit val randomSource: RandomSource[F] = RandomSource.secureRandom[F]
+    implicit val timestampProvider: TimestampProvider[F] =
+      new TimestampProvider[F] {
+        def currentTimeMillis: F[Long] = clock.realTime.map(_.toMillis)
+      }
+    val gen = UlidGen.random[F]
     new FULID[F] {
       override def generate: F[String] =
         gen.next.map(_.value)

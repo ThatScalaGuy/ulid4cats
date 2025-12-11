@@ -86,9 +86,11 @@ object UlidGen {
     * @return
     *   a UlidGen that produces random ULIDs
     */
-  def randomDefault[F[_]: Sync: Clock]: UlidGen[F] = {
+  def randomDefault[F[_]: Sync](implicit clock: Clock[F]): UlidGen[F] = {
     implicit val R: RandomSource[F] = RandomSource.secureRandom[F]
-    implicit val T: TimestampProvider[F] = TimestampProvider.fromClock[F]
+    implicit val T: TimestampProvider[F] = new TimestampProvider[F] {
+      def currentTimeMillis: F[Long] = clock.realTime.map(_.toMillis)
+    }
     random[F]
   }
 
@@ -182,9 +184,11 @@ object UlidGen {
     * @return
     *   an effect producing a UlidGen with monotonic ordering
     */
-  def monotonicDefault[F[_]: Sync: Clock]: F[UlidGen[F]] = {
+  def monotonicDefault[F[_]: Sync](implicit clock: Clock[F]): F[UlidGen[F]] = {
     implicit val R: RandomSource[F] = RandomSource.secureRandom[F]
-    implicit val T: TimestampProvider[F] = TimestampProvider.fromClock[F]
+    implicit val T: TimestampProvider[F] = new TimestampProvider[F] {
+      def currentTimeMillis: F[Long] = clock.realTime.map(_.toMillis)
+    }
     monotonic[F]
   }
 }

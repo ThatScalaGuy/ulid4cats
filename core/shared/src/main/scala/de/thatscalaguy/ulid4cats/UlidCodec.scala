@@ -107,13 +107,15 @@ object UlidCodec {
     var i = 0
     while (i < UlidStringLength) {
       val c = upper.charAt(i)
-      if (c >= 128 || DecodingChars(c) < 0)
+      val code = c.toInt
+      val decoded = DecodingChars(code).toInt
+      if (code >= 128 || decoded < 0)
         return Left(UlidError.InvalidCharacter(ulid.charAt(i), i))
       i += 1
     }
 
     val firstChar = upper.charAt(0)
-    if (DecodingChars(firstChar) > 7)
+    if (DecodingChars(firstChar.toInt).toInt > 7)
       return Left(UlidError.TimestampOverflow)
 
     Right(upper)
@@ -139,7 +141,7 @@ object UlidCodec {
     var timestamp = 0L
     var i = 0
     while (i < 10) {
-      timestamp = (timestamp << 5) | DecodingChars(ulid.charAt(i))
+      timestamp = (timestamp << 5) | DecodingChars(ulid.charAt(i).toInt).toLong
       i += 1
     }
     timestamp
@@ -161,7 +163,7 @@ object UlidCodec {
     var i = 10
 
     while (i < 26 && byteIndex < 10) {
-      bitBuffer = (bitBuffer << 5) | DecodingChars(ulid.charAt(i))
+      bitBuffer = (bitBuffer << 5) | DecodingChars(ulid.charAt(i).toInt).toLong
       bitCount += 5
       while (bitCount >= 8 && byteIndex < 10) {
         bitCount -= 8
