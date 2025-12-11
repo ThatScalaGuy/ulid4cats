@@ -21,7 +21,6 @@
 
 package de.thatscalaguy.ulid4cats
 
-import cats.effect.IO
 import munit.CatsEffectSuite
 
 class UlidSpec extends CatsEffectSuite {
