@@ -2,7 +2,7 @@ import Dependencies._
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 val Scala213 = "2.13.18"
-val Scala3 = "3.3.8"
+val Scala3 = "3.3.9"
 
 ThisBuild / tlBaseVersion := "2.0"
 
